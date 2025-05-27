@@ -1,8 +1,212 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Welcome to Jokes";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Jokes</h1>
-    <p>“JOKES” is your pocket-sized laughter break</p>
+<!-- Hero Section -->
+<div class="text-center py-16 mb-8">
+    <div class="mb-6">
+        <i class="fas fa-laugh-beam" style="font-size: 4rem; color: #6366f1;"></i>
+    </div>
+
+    <h1 class="display-4 fw-bold mb-4" style="background: linear-gradient(135deg, #6366f1, #8b5cf6); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+        Welcome to Jokes
+    </h1>
+
+    <p class="lead text-muted mb-6 mx-auto" style="max-width: 600px;">
+        Your pocket-sized laughter break! Discover hilarious jokes, share your humor,
+        and brighten someone's day with our collection of family-friendly comedy.
+    </p>
+
+    <div class="d-flex flex-column flex-md-row gap-3 justify-content-center align-items-center">
+        <a asp-controller="Jokes" asp-action="Index" class="btn btn-primary btn-lg">
+            <i class="fas fa-laugh me-2"></i>Browse All Jokes
+        </a>
+        <a asp-controller="Jokes" asp-action="Create" class="btn btn-secondary btn-lg">
+            <i class="fas fa-plus me-2"></i>Share Your Joke
+        </a>
+        <a asp-controller="Jokes" asp-action="ShowSearchForm" class="btn btn-outline-primary btn-lg">
+            <i class="fas fa-search me-2"></i>Find a Joke
+        </a>
+    </div>
 </div>
+
+<!-- Features Section -->
+<div class="row mb-12">
+    <div class="col-lg-4 mb-6">
+        <div class="card h-100 text-center border-0 shadow-sm">
+            <div class="card-body p-6">
+                <div class="mb-4">
+                    <i class="fas fa-laugh-squint text-primary" style="font-size: 3rem;"></i>
+                </div>
+                <h4 class="card-title mb-3">Endless Laughter</h4>
+                <p class="card-text text-muted">
+                    Discover a vast collection of clean, family-friendly jokes that will keep you
+                    and your loved ones entertained for hours.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-4 mb-6">
+        <div class="card h-100 text-center border-0 shadow-sm">
+            <div class="card-body p-6">
+                <div class="mb-4">
+                    <i class="fas fa-users text-success" style="font-size: 3rem;"></i>
+                </div>
+                <h4 class="card-title mb-3">Share & Connect</h4>
+                <p class="card-text text-muted">
+                    Join our community of comedy lovers! Share your favorite jokes and discover
+                    new ones from fellow humor enthusiasts.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-4 mb-6">
+        <div class="card h-100 text-center border-0 shadow-sm">
+            <div class="card-body p-6">
+                <div class="mb-4">
+                    <i class="fas fa-search text-info" style="font-size: 3rem;"></i>
+                </div>
+                <h4 class="card-title mb-3">Easy Discovery</h4>
+                <p class="card-text text-muted">
+                    Find the perfect joke for any occasion with our powerful search feature.
+                    Filter by keywords and topics.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Quick Actions Section -->
+<div class="card bg-gradient-primary text-white mb-8" style="background: linear-gradient(135deg, #6366f1, #8b5cf6);">
+    <div class="card-body p-6">
+        <div class="row align-items-center">
+            <div class="col-lg-8">
+                <h3 class="text-white mb-3">Ready to Share Some Laughs?</h3>
+                <p class="text-white-50 mb-4 mb-lg-0">
+                    Whether you're looking for a quick chuckle or want to contribute to our growing
+                    collection, we've got you covered. Start your journey with humor today!
+                </p>
+            </div>
+            <div class="col-lg-4 text-lg-end">
+                <a asp-controller="Jokes" asp-action="Create" class="btn btn-light btn-lg me-3">
+                    <i class="fas fa-plus me-2"></i>Add Joke
+                </a>
+                <a asp-controller="Jokes" asp-action="Index" class="btn btn-outline-light btn-lg">
+                    <i class="fas fa-eye me-2"></i>View All
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Fun Stats Section -->
+<div class="row text-center mb-8">
+    <div class="col-6 col-md-3 mb-4">
+        <div class="p-4">
+            <h2 class="text-primary mb-2 fw-bold">1K+</h2>
+            <p class="text-muted mb-0">Jokes Shared</p>
+        </div>
+    </div>
+    <div class="col-6 col-md-3 mb-4">
+        <div class="p-4">
+            <h2 class="text-success mb-2 fw-bold">500+</h2>
+            <p class="text-muted mb-0">Happy Users</p>
+        </div>
+    </div>
+    <div class="col-6 col-md-3 mb-4">
+        <div class="p-4">
+            <h2 class="text-warning mb-2 fw-bold">24/7</h2>
+            <p class="text-muted mb-0">Fun Available</p>
+        </div>
+    </div>
+    <div class="col-6 col-md-3 mb-4">
+        <div class="p-4">
+            <h2 class="text-info mb-2 fw-bold">100%</h2>
+            <p class="text-muted mb-0">Family Friendly</p>
+        </div>
+    </div>
+</div>
+
+<!-- Testimonial/Quote Section -->
+<div class="text-center py-12 border-top">
+    <div class="mx-auto" style="max-width: 800px;">
+        <blockquote class="blockquote">
+            <p class="h4 text-muted fst-italic">
+                "Laughter is timeless, imagination has no age, and dreams are forever."
+            </p>
+            <footer class="blockquote-footer mt-3">
+                <cite title="Source Title">Walt Disney</cite>
+            </footer>
+        </blockquote>
+
+        <div class="mt-6">
+            <a asp-controller="Jokes" asp-action="Index" class="btn btn-primary">
+                Start Laughing Now <i class="fas fa-arrow-right ms-2"></i>
+            </a>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add smooth animations to feature cards
+            const cards = document.querySelectorAll('.card');
+            cards.forEach((card, index) => {
+                card.style.animationDelay = `${index * 0.1}s`;
+                card.classList.add('fade-in');
+            });
+
+            // Add hover effects to action buttons
+            const actionBtns = document.querySelectorAll('.btn');
+            actionBtns.forEach(btn => {
+                btn.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-2px)';
+                });
+
+                btn.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                });
+            });
+
+            // Animate stats counters
+            const stats = document.querySelectorAll('.row.text-center h2');
+            const animateStats = () => {
+                stats.forEach(stat => {
+                    const finalNumber = stat.textContent;
+                    const number = parseInt(finalNumber.replace(/\D/g, ''));
+                    const suffix = finalNumber.replace(/\d/g, '');
+
+                    let current = 0;
+                    const increment = number / 50;
+                    const timer = setInterval(() => {
+                        current += increment;
+                        if (current >= number) {
+                            stat.textContent = number + suffix;
+                            clearInterval(timer);
+                        } else {
+                            stat.textContent = Math.floor(current) + suffix;
+                        }
+                    }, 30);
+                });
+            };
+
+            // Trigger animation when stats section is visible
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        animateStats();
+                        observer.unobserve(entry.target);
+                    }
+                });
+            });
+
+            const statsSection = document.querySelector('.row.text-center');
+            if (statsSection) {
+                observer.observe(statsSection);
+            }
+        });
+    </script>
+}

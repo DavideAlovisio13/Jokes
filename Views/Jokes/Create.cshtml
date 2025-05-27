@@ -1,38 +1,283 @@
 ﻿@model Jokes.Models.Joke
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Create New Joke";
 }
 
-<h1>Create</h1>
+<!-- Page Header -->
+<div class="mb-6">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a asp-action="Index" class="text-decoration-none">
+                    <i class="fas fa-list me-1"></i>All Jokes
+                </a>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">Create New Joke</li>
+        </ol>
+    </nav>
 
-<h4>Joke</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="JokeQuestion" class="control-label"></label>
-                <input asp-for="JokeQuestion" class="form-control" />
-                <span asp-validation-for="JokeQuestion" class="text-danger"></span>
+    <h1 class="mb-2">
+        <i class="fas fa-plus-circle text-primary me-3"></i>Create New Joke
+    </h1>
+    <p class="text-muted mb-0">Share your humor with the world! Create a new joke that will make people smile.</p>
+</div>
+
+<!-- Main Content -->
+<div class="row justify-content-center">
+    <div class="col-lg-8">
+        <!-- Creation Form Card -->
+        <div class="card">
+            <div class="card-header">
+                <h4 class="mb-0">
+                    <i class="fas fa-edit me-2"></i>Joke Details
+                </h4>
+                <small class="text-muted">Fill in the details to create your hilarious joke</small>
             </div>
-            <div class="form-group">
-                <label asp-for="JokeAnswer" class="control-label"></label>
-                <input asp-for="JokeAnswer" class="form-control" />
-                <span asp-validation-for="JokeAnswer" class="text-danger"></span>
+
+            <div class="card-body">
+                <form asp-action="Create" id="jokeForm">
+                    <div asp-validation-summary="ModelOnly" class="alert alert-danger d-none" role="alert">
+                        <i class="fas fa-exclamation-triangle me-2"></i>
+                        Please fix the errors below:
+                    </div>
+
+                    <!-- Joke Question -->
+                    <div class="form-group">
+                        <label asp-for="JokeQuestion" class="form-label">
+                            <i class="fas fa-question-circle text-primary me-2"></i>
+                            Joke Question/Setup
+                        </label>
+                        <textarea asp-for="JokeQuestion"
+                                  class="form-control"
+                                  rows="4"
+                                  placeholder="Enter the setup or question for your joke..."
+                                  maxlength="500"
+                                  id="jokeQuestion"></textarea>
+                        <div class="d-flex justify-content-between mt-2">
+                            <span asp-validation-for="JokeQuestion" class="text-danger"></span>
+                            <small class="text-muted">
+                                <span id="questionCount">0</span>/500 characters
+                            </small>
+                        </div>
+                        <small class="form-text text-muted">
+                            <i class="fas fa-lightbulb me-1"></i>
+                            Tip: Make it engaging and set up the punchline perfectly!
+                        </small>
+                    </div>
+
+                    <!-- Joke Answer -->
+                    <div class="form-group">
+                        <label asp-for="JokeAnswer" class="form-label">
+                            <i class="fas fa-laugh text-warning me-2"></i>
+                            Punchline/Answer
+                        </label>
+                        <textarea asp-for="JokeAnswer"
+                                  class="form-control"
+                                  rows="3"
+                                  placeholder="Enter the punchline or answer to your joke..."
+                                  maxlength="300"
+                                  id="jokeAnswer"></textarea>
+                        <div class="d-flex justify-content-between mt-2">
+                            <span asp-validation-for="JokeAnswer" class="text-danger"></span>
+                            <small class="text-muted">
+                                <span id="answerCount">0</span>/300 characters
+                            </small>
+                        </div>
+                        <small class="form-text text-muted">
+                            <i class="fas fa-lightbulb me-1"></i>
+                            Tip: Keep it punchy and surprising for maximum impact!
+                        </small>
+                    </div>
+
+                    <!-- Preview Card -->
+                    <div class="card bg-light border-dashed d-none" id="previewCard">
+                        <div class="card-header">
+                            <h6 class="mb-0">
+                                <i class="fas fa-eye me-2"></i>Live Preview
+                            </h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="joke-question mb-3" id="previewQuestion">
+                                <i class="fas fa-question-circle text-primary me-2"></i>
+                                <span id="previewQuestionText">Your joke question will appear here...</span>
+                            </div>
+                            <div class="joke-answer" id="previewAnswer">
+                                <i class="fas fa-lightbulb text-warning me-2"></i>
+                                <span id="previewAnswerText">Your punchline will appear here...</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Form Actions -->
+                    <div class="d-flex justify-content-between align-items-center mt-6">
+                        <a asp-action="Index" class="btn btn-secondary">
+                            <i class="fas fa-arrow-left me-2"></i>Back to List
+                        </a>
+
+                        <div class="d-flex gap-3">
+                            <button type="button" class="btn btn-outline-primary" id="previewBtn">
+                                <i class="fas fa-eye me-2"></i>Preview
+                            </button>
+                            <button type="submit" class="btn btn-primary" id="submitBtn">
+                                <i class="fas fa-save me-2"></i>Create Joke
+                            </button>
+                        </div>
+                    </div>
+                </form>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+        </div>
+
+        <!-- Helper Tips -->
+        <div class="card mt-6 border-info">
+            <div class="card-header bg-info text-white">
+                <h6 class="mb-0">
+                    <i class="fas fa-info-circle me-2"></i>Tips for Great Jokes
+                </h6>
             </div>
-        </form>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h6><i class="fas fa-check-circle text-success me-2"></i>Do's</h6>
+                        <ul class="list-unstyled">
+                            <li><i class="fas fa-angle-right text-success me-2"></i>Keep it clean and friendly</li>
+                            <li><i class="fas fa-angle-right text-success me-2"></i>Make the setup clear</li>
+                            <li><i class="fas fa-angle-right text-success me-2"></i>Surprise with the punchline</li>
+                            <li><i class="fas fa-angle-right text-success me-2"></i>Test it on friends first</li>
+                        </ul>
+                    </div>
+                    <div class="col-md-6">
+                        <h6><i class="fas fa-times-circle text-danger me-2"></i>Don'ts</h6>
+                        <ul class="list-unstyled">
+                            <li><i class="fas fa-angle-right text-danger me-2"></i>Avoid offensive content</li>
+                            <li><i class="fas fa-angle-right text-danger me-2"></i>Don't make it too long</li>
+                            <li><i class="fas fa-angle-right text-danger me-2"></i>Don't spoil the punchline</li>
+                            <li><i class="fas fa-angle-right text-danger me-2"></i>Avoid overused formats</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const questionInput = document.getElementById('jokeQuestion');
+            const answerInput = document.getElementById('jokeAnswer');
+            const questionCount = document.getElementById('questionCount');
+            const answerCount = document.getElementById('answerCount');
+            const previewBtn = document.getElementById('previewBtn');
+            const previewCard = document.getElementById('previewCard');
+            const previewQuestionText = document.getElementById('previewQuestionText');
+            const previewAnswerText = document.getElementById('previewAnswerText');
+            const submitBtn = document.getElementById('submitBtn');
+            const form = document.getElementById('jokeForm');
+
+            // Character counters
+            function updateCharCount(input, counter) {
+                counter.textContent = input.value.length;
+
+                // Update color based on remaining characters
+                const maxLength = input.getAttribute('maxlength');
+                const remaining = maxLength - input.value.length;
+
+                if (remaining < 50) {
+                    counter.className = 'text-warning';
+                } else if (remaining < 20) {
+                    counter.className = 'text-danger';
+                } else {
+                    counter.className = 'text-muted';
+                }
+            }
+
+            questionInput.addEventListener('input', function() {
+                updateCharCount(this, questionCount);
+                updatePreview();
+            });
+
+            answerInput.addEventListener('input', function() {
+                updateCharCount(this, answerCount);
+                updatePreview();
+            });
+
+            // Live preview functionality
+            function updatePreview() {
+                const hasContent = questionInput.value.trim() || answerInput.value.trim();
+
+                if (hasContent) {
+                    previewQuestionText.textContent = questionInput.value || 'Your joke question will appear here...';
+                    previewAnswerText.textContent = answerInput.value || 'Your punchline will appear here...';
+                }
+            }
+
+            // Preview toggle
+            previewBtn.addEventListener('click', function() {
+                if (previewCard.classList.contains('d-none')) {
+                    previewCard.classList.remove('d-none');
+                    updatePreview();
+                    this.innerHTML = '<i class="fas fa-eye-slash me-2"></i>Hide Preview';
+
+                    // Smooth scroll to preview
+                    previewCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                } else {
+                    previewCard.classList.add('d-none');
+                    this.innerHTML = '<i class="fas fa-eye me-2"></i>Preview';
+                }
+            });
+
+            // Form validation enhancement
+            form.addEventListener('submit', function(e) {
+                const question = questionInput.value.trim();
+                const answer = answerInput.value.trim();
+
+                if (!question || !answer) {
+                    e.preventDefault();
+
+                    // Show validation summary
+                    const validationSummary = document.querySelector('[asp-validation-summary]');
+                    if (validationSummary) {
+                        validationSummary.classList.remove('d-none');
+                        validationSummary.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    }
+
+                    // Focus on empty field
+                    if (!question) {
+                        questionInput.focus();
+                    } else if (!answer) {
+                        answerInput.focus();
+                    }
+
+                    return false;
+                }
+
+                // Update submit button
+                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Creating...';
+                submitBtn.disabled = true;
+            });
+
+            // Auto-expand textareas
+            function autoExpand(element) {
+                element.style.height = 'auto';
+                element.style.height = element.scrollHeight + 'px';
+            }
+
+            questionInput.addEventListener('input', function() {
+                autoExpand(this);
+            });
+
+            answerInput.addEventListener('input', function() {
+                autoExpand(this);
+            });
+
+            // Initialize character counts
+            updateCharCount(questionInput, questionCount);
+            updateCharCount(answerInput, answerCount);
+        });
+    </script>
 }
